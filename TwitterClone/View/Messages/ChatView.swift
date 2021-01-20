@@ -16,11 +16,14 @@ struct ChatView: View {
         VStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    ForEach(0..<15) { _ in
-                        Text("chat bubble")
+                    
+                    ForEach(MOCK_MESSAGES) { messages in
+                        
+                        MessageView(messages: messages)
                     }
                 }
-            }
+            }.padding(.top)
+            
             MessagesInputView(messageText: $messageText)
                 .padding()
         }
