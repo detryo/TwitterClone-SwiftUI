@@ -10,20 +10,20 @@ import SwiftUI
 struct NewTweetView: View {
     
     @Binding var isPressent: Bool
+    @State var captionText: String = ""
     
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Image("batman")
+                HStack(alignment: .top) {
+                    Image("venom-10")
                         .resizable()
                         .scaledToFill()
                         .clipped()
                         .frame(width: 64, height: 64)
                         .cornerRadius(32)
                     
-                    Text("just a text")
-                        .foregroundColor(.gray)
+                    TextArea("What's happening", text: $captionText)
                     
                     Spacer()
                 }

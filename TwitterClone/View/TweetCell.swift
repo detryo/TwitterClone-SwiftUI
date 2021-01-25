@@ -13,7 +13,7 @@ struct TweetCell: View {
         
         VStack(alignment: .leading) {
             HStack(alignment: .top, spacing: 12) {
-                Image("batman")
+                Image("venom-10")
                     .resizable()
                     .scaledToFill()
                     .clipped()

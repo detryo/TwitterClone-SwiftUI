@@ -11,7 +11,7 @@ struct ProfileHeaderView: View {
     var body: some View {
         
         VStack {
-            Image("batman")
+            Image("venom-10")
                 .resizable()
                 .scaledToFill()
                 .clipped()
