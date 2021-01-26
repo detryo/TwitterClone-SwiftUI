@@ -9,24 +9,55 @@ import SwiftUI
 
 struct RegistrationView: View {
     
+    @State var selectedUIImage: UIImage?
+    @State var image: Image?
+    
     @State var email = ""
     @State var password = ""
     @State var fullName = ""
     @State var userName = ""
+    
+    @State var showImagePicker = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
+    @ObservedObject var viewModel = AuthViewModel()
+    
+    func loadImage() {
+        guard let selectedImage = selectedUIImage else { return }
+        
+        image = Image(uiImage: selectedImage)
+    }
     
     var body: some View {
             
         ZStack {
             VStack {
-                Image("plus_photo")
-                    .resizable()
-                    .renderingMode(.template)
-                    .scaledToFill()
-                    .frame(width: 140, height: 140)
-                    .padding(.top, 88)
-                    .padding(.bottom, 16)
-                    .foregroundColor(.white)
+                Button(action: { showImagePicker.toggle() }, label: {
+                    ZStack {
+                        if let image = image {
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 140, height: 140)
+                                .clipped()
+                                .cornerRadius(70)
+                                .padding(.top, 88)
+                                .padding(.bottom, 16)
+                            
+                        } else {
+                            Image("plus_photo")
+                                .resizable()
+                                .renderingMode(.template)
+                                .scaledToFill()
+                                .frame(width: 140, height: 140)
+                                .padding(.top, 88)
+                                .padding(.bottom, 16)
+                                .foregroundColor(.white)
+                        }
+                    }
+                }).sheet(isPresented: $showImagePicker, onDismiss: loadImage, content: {
+                    ImagePicker(image: $selectedUIImage)
+                })
                 
                 VStack(spacing: 20) {
                     
@@ -56,7 +87,13 @@ struct RegistrationView: View {
                 }
                 .padding(.horizontal, 32)
                 
-                Button(action: {}, label: {
+                Button(action: {
+                    
+                    guard let image = selectedUIImage else { return }
+                    
+                    viewModel.registerUser(email: email, password: password, userName: userName,
+                                           fullName: fullName, profileImage: image)
+                }, label: {
                     Text("Sign Up")
                         .font(.headline)
                         .foregroundColor(.blue)
