@@ -20,7 +20,7 @@ struct RegistrationView: View {
     @State var showImagePicker = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @ObservedObject var viewModel = AuthViewModel()
+    @EnvironmentObject var viewModel: AuthViewModel
     
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }

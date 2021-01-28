@@ -10,9 +10,32 @@ import Firebase
 
 class AuthViewModel: ObservableObject {
     
-    func logIn() {
+    @Published var userSession: FirebaseAuth.User?
+    @Published var isAuthenticating = false
+    @Published var error: Error?
+    @Published var user: User?
+    
+    init() {
+        userSession = Auth.auth().currentUser
+    }
+    
+    func logIn(withEmail email: String, password: String) {
         
-        
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            
+            if let error =  error {
+                // TO DO: I need a UIAlertController
+                print("Error: failed to Log In \(error.localizedDescription)")
+                return
+            }
+            self.userSession = result?.user
+        }
+    }
+    
+    func signOut() {
+        userSession = nil
+        try? Auth.auth().signOut()
+        print("DEBUG: signOut ")
     }
     
     func registerUser(email: String, password: String, userName: String, fullName: String, profileImage: UIImage) {
@@ -46,13 +69,14 @@ class AuthViewModel: ObservableObject {
                     guard let user = result?.user else { return }
                     
                     let data = ["email": email,
-                                "userName": userName,
+                                "userName": userName.lowercased(),
                                 "fullName": fullName,
                                 "profileImageURL": profileImageURL,
                                 "uid": user.uid]
                     
                     Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
                         
+                        self.userSession = user
                         print("DEBUG: Successfully upload user data")
                     }
                 }
