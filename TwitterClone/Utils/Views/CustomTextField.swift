@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomeTextField: View {
+struct CustomTextField: View {
     
     @Binding var text: String
     let placeholder: Text

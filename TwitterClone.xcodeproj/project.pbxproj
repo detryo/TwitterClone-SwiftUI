@@ -14,7 +14,8 @@
 		3618A89525B9A0B400DD41AD /* TextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3618A89425B9A0B400DD41AD /* TextArea.swift */; };
 		3618A89D25B9D7C700DD41AD /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3618A89C25B9D7C700DD41AD /* LogInView.swift */; };
 		3618A8A025B9D7D300DD41AD /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3618A89F25B9D7D300DD41AD /* RegistrationView.swift */; };
-		3618A8A325B9DA3200DD41AD /* CustomeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3618A8A225B9DA3200DD41AD /* CustomeTextField.swift */; };
+		3618A8A325B9DA3200DD41AD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3618A8A225B9DA3200DD41AD /* CustomTextField.swift */; };
+		3640C10125C3194A000818BA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3640C10025C3194A000818BA /* User.swift */; };
 		36610FBF25B82F8600D06C31 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36610FBE25B82F8600D06C31 /* UserProfileView.swift */; };
 		36610FC325B830FE00D06C31 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36610FC225B830FE00D06C31 /* ProfileHeaderView.swift */; };
 		36610FC625B8311B00D06C31 /* ProfileActionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36610FC525B8311B00D06C31 /* ProfileActionButtonView.swift */; };
@@ -53,7 +54,8 @@
 		3618A89425B9A0B400DD41AD /* TextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextArea.swift; sourceTree = "<group>"; };
 		3618A89C25B9D7C700DD41AD /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		3618A89F25B9D7D300DD41AD /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		3618A8A225B9DA3200DD41AD /* CustomeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeTextField.swift; sourceTree = "<group>"; };
+		3618A8A225B9DA3200DD41AD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		3640C10025C3194A000818BA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		36610FBE25B82F8600D06C31 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		36610FC225B830FE00D06C31 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		36610FC525B8311B00D06C31 /* ProfileActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActionButtonView.swift; sourceTree = "<group>"; };
@@ -145,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				3618A89425B9A0B400DD41AD /* TextArea.swift */,
-				3618A8A225B9DA3200DD41AD /* CustomeTextField.swift */,
+				3618A8A225B9DA3200DD41AD /* CustomTextField.swift */,
 				3673B68025BEDB0C00721CD2 /* CustomSecureField.swift */,
 				3673B68325BF1AF600721CD2 /* ImagePicker.swift */,
 			);
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				366B25C225B6F10D00C91DEA /* Message.swift */,
+				3640C10025C3194A000818BA /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -316,7 +319,7 @@
 				36077AF725AE01C9005A709E /* TwitterCloneApp.swift in Sources */,
 				36851F8325B06F7100276918 /* TweetCell.swift in Sources */,
 				3618A89D25B9D7C700DD41AD /* LogInView.swift in Sources */,
-				3618A8A325B9DA3200DD41AD /* CustomeTextField.swift in Sources */,
+				3618A8A325B9DA3200DD41AD /* CustomTextField.swift in Sources */,
 				3676750925B883000015D54B /* NewTweetView.swift in Sources */,
 				36610FC925B8315E00D06C31 /* FilterButtonView.swift in Sources */,
 				3673B68425BF1AF600721CD2 /* ImagePicker.swift in Sources */,
@@ -326,6 +329,7 @@
 				367A14DE25C06A4F00BAE23F /* AuthViewModel.swift in Sources */,
 				36610FC325B830FE00D06C31 /* ProfileHeaderView.swift in Sources */,
 				36610FC625B8311B00D06C31 /* ProfileActionButtonView.swift in Sources */,
+				3640C10125C3194A000818BA /* User.swift in Sources */,
 				366B25C325B6F10D00C91DEA /* Message.swift in Sources */,
 				36610FBF25B82F8600D06C31 /* UserProfileView.swift in Sources */,
 				36A5D5E725B5963B00F6D424 /* UserCell.swift in Sources */,

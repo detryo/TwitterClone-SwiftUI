@@ -27,7 +27,7 @@ struct LogInView: View {
                         .padding(.bottom, 32)
                     
                     VStack(spacing: 20) {
-                        CustomeTextField(text: $email, placeholder: Text("Email"), imageName: "envelope")
+                        CustomTextField(text: $email, placeholder: Text("Email"), imageName: "envelope")
                             .padding()
                             .background(Color(.init(white: 1, alpha: 0.15)))
                             .cornerRadius(10)

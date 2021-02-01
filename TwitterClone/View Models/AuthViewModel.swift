@@ -17,6 +17,7 @@ class AuthViewModel: ObservableObject {
     
     init() {
         userSession = Auth.auth().currentUser
+        fetchUser()
     }
     
     func logIn(withEmail email: String, password: String) {
@@ -38,43 +39,59 @@ class AuthViewModel: ObservableObject {
         print("DEBUG: signOut ")
     }
     
-    func registerUser(email: String, password: String, userName: String, fullName: String, profileImage: UIImage) {
+    func fetchUser() {
         
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.2) else { return }
+        guard let uid = userSession?.uid else { return }
         
-        let fileName = NSUUID().uuidString
-        let storageRef = Storage.storage().reference().child(fileName)
-        
-        storageRef.putData(imageData, metadata: nil) { _, error in
+        Firestore.firestore().collection("users").document(uid).getDocument { snapshot, _ in
             
-            if let error =  error {
-                // TO DO: I need a UIAlertController
-                debugPrint("Error: failed to upload image \(error.localizedDescription)")
+            guard let data = snapshot?.data() else { return }
+            
+            let user = User(dictionary: data)
+            
+            print("DEBUG: User is \(user.username)")
+        }
+    }
+    
+    func registerUser(email: String, password: String, username: String, fullname: String, profileImage: UIImage) {
+        
+        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
+        
+        let filename = NSUUID().uuidString
+        let strongRef = Storage.storage().reference().child(filename)
+        
+        strongRef.putData(imageData, metadata: nil) { _, error in
+            
+            if let error = error {
+                print("DEBUG: Failed to upload image \(error.localizedDescription)")
                 return
             }
-            print("DEBUG: Successfully upload user photo")
             
-            storageRef.downloadURL { url, _ in
+            strongRef.downloadURL { url, _ in
                 
                 guard let profileImageURL = url?.absoluteString else { return }
                 
                 Auth.auth().createUser(withEmail: email, password: password) { result, error in
                     
                     if let error = error {
-                        // TO DO: I need an UIAlertController for any error
-                        debugPrint("Error: \(error.localizedDescription)")
+                        print("DEBUG: Error \(error.localizedDescription)")
                         return
                     }
                     
                     guard let user = result?.user else { return }
                     
                     let data = ["email": email,
-                                "userName": userName.lowercased(),
-                                "fullName": fullName,
+                                "username": username,
+                                "fullname": fullname,
                                 "profileImageURL": profileImageURL,
                                 "uid": user.uid]
                     
-                    Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
+                    Firestore.firestore().collection("users").document(user.uid).setData(data) { (error) in
+                        
+                        if let error = error {
+                            print("DEBUG: Error \(error.localizedDescription)")
+                            return
+                        }
                         
                         self.userSession = user
                         print("DEBUG: Successfully upload user data")
