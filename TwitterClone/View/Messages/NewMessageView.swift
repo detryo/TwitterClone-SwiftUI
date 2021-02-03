@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewMessageView: View {
     
+    @ObservedObject var viewModel = SearchViewModel()
     @State var searchText = ""
     @Binding var show: Bool
     @Binding var startChat: Bool
@@ -20,7 +21,7 @@ struct NewMessageView: View {
                 .padding()
             
             VStack(alignment: .leading) {
-                ForEach(0..<10) { _ in
+                ForEach(viewModel.users) { user in
                     HStack{ Spacer() }
                     
                     Button(action: {
@@ -28,7 +29,7 @@ struct NewMessageView: View {
                         self.startChat.toggle()
                         
                     }, label: {
-                        UserCell()
+                        UserCell(user: user)
                     })
                 }
             }.padding(.leading)
