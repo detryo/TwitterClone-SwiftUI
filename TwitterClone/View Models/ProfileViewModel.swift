@@ -15,15 +15,19 @@ class ProfileViewModel: ObservableObject {
     
     init(user: User) {
         self.user = user
+        checkUserIsFollowed()
     }
     
     func follow() {
         
         guard let currentUID = Auth.auth().currentUser?.uid else { return }
         
-        COLLECTION_FOLLOWING.document(currentUID).collection("user-following").document(user.id).setData([:]) { _ in
+        let followingRef = COLLECTION_FOLLOWING.document(currentUID).collection("user-following")
+        let followersRef = COLLECTION_FOLLOWERS.document(user.id).collection("user-followers")
+        
+        followingRef.document(user.id).setData([:]) { _ in
             
-            COLLECTION_FOLLOWERS.document(self.user.id).collection("user-followers").document(currentUID).setData([:]) { _ in
+            followersRef.document(currentUID).setData([:]) { _ in
                 
                 self.isFollowed = true
             }
@@ -32,6 +36,31 @@ class ProfileViewModel: ObservableObject {
     
     func unFollow() {
         
+        guard let currentUID = Auth.auth().currentUser?.uid else { return }
         
+        let followingRef = COLLECTION_FOLLOWING.document(currentUID).collection("user-following")
+        let followersRef = COLLECTION_FOLLOWERS.document(user.id).collection("user-followers")
+        
+        followingRef.document(user.id).delete { _ in
+            
+            followersRef.document(currentUID).delete { _ in
+                
+                self.isFollowed = false
+            }
+        }
+    }
+    
+    func checkUserIsFollowed() {
+        
+        guard let currentUID = Auth.auth().currentUser?.uid else { return }
+        
+        let followingRef = COLLECTION_FOLLOWING.document(currentUID).collection("user-following")
+        
+        followingRef.document(user.id).getDocument { snapshot, _ in
+            
+            guard let isFollowed = snapshot?.exists else { return }
+            
+            self.isFollowed = isFollowed
+        }
     }
 }
