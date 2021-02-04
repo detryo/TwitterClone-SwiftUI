@@ -59,7 +59,7 @@ struct ProfileHeaderView: View {
             
             ProfileActionButtonView(viewModel: viewModel, isFollowed: $isFollowed)
             
-            FilterButtonView(selectedOptions: $selectedFilter)
+            FilterButtonView(selectedOption: $selectedFilter)
                 .padding()
             
             Spacer()

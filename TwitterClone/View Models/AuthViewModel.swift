@@ -10,6 +10,8 @@ import Firebase
 
 class AuthViewModel: ObservableObject {
     
+    static let shared = AuthViewModel()
+    
     @Published var userSession: FirebaseAuth.User?
     @Published var isAuthenticating = false
     @Published var error: Error?
@@ -30,11 +32,13 @@ class AuthViewModel: ObservableObject {
                 return
             }
             self.userSession = result?.user
+            self.fetchUser()
         }
     }
     
     func signOut() {
         userSession = nil
+        user = nil
         try? Auth.auth().signOut()
         print("DEBUG: signOut ")
     }
@@ -46,10 +50,7 @@ class AuthViewModel: ObservableObject {
         Firestore.firestore().collection("users").document(uid).getDocument { snapshot, _ in
             
             guard let data = snapshot?.data() else { return }
-            
-            let user = User(dictionary: data)
-            
-            print("DEBUG: User is \(user.username)")
+            self.user = User(dictionary: data)
         }
     }
     
@@ -81,7 +82,7 @@ class AuthViewModel: ObservableObject {
                     guard let user = result?.user else { return }
                     
                     let data = ["email": email,
-                                "username": username,
+                                "username": username.lowercased(),
                                 "fullname": fullname,
                                 "profileImageURL": profileImageURL,
                                 "uid": user.uid]
@@ -94,6 +95,7 @@ class AuthViewModel: ObservableObject {
                         }
                         
                         self.userSession = user
+                        self.fetchUser()
                         print("DEBUG: Successfully upload user data")
                     }
                 }

@@ -17,21 +17,17 @@ struct FeedView: View {
             
             ScrollView {
                 VStack {
-                    ForEach(0..<10) { _ in
+                    ForEach(0..<20) { _ in
                         TweetCell()
                     }
                 }.padding()
             }
             
-            Button(action: {
-                viewModel.signOut()
-//                    isShowingNewTweetView.toggle()
-                
-            }, label: {
+            Button(action: { isShowingNewTweetView.toggle() }, label: {
                 Image("Tweet")
                     .resizable()
                     .renderingMode(.template)
-                    .frame(width: 32, height: 32)
+                    .frame(width: 28, height: 28)
                     .padding()
             })
             .background(Color(.systemBlue))
@@ -39,7 +35,7 @@ struct FeedView: View {
             .clipShape(Circle())
             .padding()
             .fullScreenCover(isPresented: $isShowingNewTweetView) {
-                NewTweetView(isPressent: $isShowingNewTweetView)
+                NewTweetView(isPressented: $isShowingNewTweetView)
             }
         }
     }

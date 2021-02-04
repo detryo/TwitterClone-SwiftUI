@@ -6,29 +6,32 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct NewTweetView: View {
     
-    @Binding var isPressent: Bool
+    @Binding var isPressented: Bool
     @State var captionText: String = ""
     
     var body: some View {
         NavigationView {
             VStack {
                 HStack(alignment: .top) {
-                    Image("venom-10")
-                        .resizable()
-                        .scaledToFill()
-                        .clipped()
-                        .frame(width: 64, height: 64)
-                        .cornerRadius(32)
                     
+                    if let user = AuthViewModel.shared.user {
+                        KFImage(URL(string: user.profileImageURL))
+                            .resizable()
+                            .scaledToFill()
+                            .clipped()
+                            .frame(width: 64, height: 64)
+                            .cornerRadius(32)
+                    }
                     TextArea("What's happening", text: $captionText)
                     
                     Spacer()
                 }
                 .padding()
-                .navigationBarItems(leading: Button(action: { isPressent.toggle()}, label: {
+                .navigationBarItems(leading: Button(action: { isPressented.toggle()}, label: {
                     
                     Text("Cancel")
                         .foregroundColor(.blue)
@@ -49,6 +52,6 @@ struct NewTweetView: View {
 
 struct NewTweetView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTweetView(isPressent: .constant(true))
+        NewTweetView(isPressented: .constant(true))
     }
 }

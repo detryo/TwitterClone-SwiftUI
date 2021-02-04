@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TweetFilterOptions: Int, CaseIterable{
+enum TweetFilterOptions: Int, CaseIterable {
     
     case tweets
     case replies
@@ -15,7 +15,6 @@ enum TweetFilterOptions: Int, CaseIterable{
     
     var title: String {
         switch self {
-        
         case .tweets: return "Tweets"
         case .replies: return "Tweets & Replies"
         case .likes: return "Likes"
@@ -24,34 +23,31 @@ enum TweetFilterOptions: Int, CaseIterable{
 }
 
 struct FilterButtonView: View {
+    @Binding var selectedOption: TweetFilterOptions
     
-    @Binding var selectedOptions: TweetFilterOptions
-    
-    private let underLineWidth = UIScreen.main.bounds.width / CGFloat(TweetFilterOptions.allCases.count)
+    private let underlineWidth = UIScreen.main.bounds.width / CGFloat(TweetFilterOptions.allCases.count)
     
     private var padding: CGFloat {
-        let rawValue = CGFloat(selectedOptions.rawValue)
+        let rawValue = CGFloat(selectedOption.rawValue)
         let count = CGFloat(TweetFilterOptions.allCases.count)
         return ((UIScreen.main.bounds.width / count) * rawValue) + 16
     }
     
     var body: some View {
-        
         VStack(alignment: .leading) {
             HStack {
                 ForEach(TweetFilterOptions.allCases, id: \.self) { option in
-                    
                     Button(action: {
-                        self.selectedOptions = option
+                        self.selectedOption = option
                     }, label: {
                         Text(option.title)
-                            .frame(width: underLineWidth - 8)
+                            .frame(width: underlineWidth - 8)
                     })
                 }
             }
             
             Rectangle()
-                .frame(width: underLineWidth - 32, height: 3, alignment: .center)
+                .frame(width: underlineWidth - 32, height: 3, alignment: .center)
                 .foregroundColor(.blue)
                 .padding(.leading, padding)
                 .animation(.spring())
@@ -61,6 +57,6 @@ struct FilterButtonView: View {
 
 struct FilterButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterButtonView(selectedOptions: .constant(.tweets))
+        FilterButtonView(selectedOption: .constant(.likes))
     }
 }
