@@ -46,6 +46,7 @@
 		36A5D5EF25B5A2F700F6D424 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5D5EE25B5A2F700F6D424 /* ConversationCell.swift */; };
 		36A5D5F225B5B57600F6D424 /* MessagesInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5D5F125B5B57500F6D424 /* MessagesInputView.swift */; };
 		36A5D5F525B5B7CB00F6D424 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5D5F425B5B7CB00F6D424 /* ChatView.swift */; };
+		36B3238425CC033E00517208 /* UploadNewTweetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B3238325CC033E00517208 /* UploadNewTweetModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		36A5D5EE25B5A2F700F6D424 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		36A5D5F125B5B57500F6D424 /* MessagesInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesInputView.swift; sourceTree = "<group>"; };
 		36A5D5F425B5B7CB00F6D424 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		36B3238325CC033E00517208 /* UploadNewTweetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadNewTweetModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				367A14DD25C06A4F00BAE23F /* AuthViewModel.swift */,
 				368936EB25C860E700AC875A /* SearchViewModel.swift */,
 				369668D925C9A282009A5F88 /* ProfileViewModel.swift */,
+				36B3238325CC033E00517208 /* UploadNewTweetModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				36A5D5E725B5963B00F6D424 /* UserCell.swift in Sources */,
 				36A5D5EB25B5A2BA00F6D424 /* ConversationView.swift in Sources */,
 				3673B68125BEDB0D00721CD2 /* CustomSecureField.swift in Sources */,
+				36B3238425CC033E00517208 /* UploadNewTweetModel.swift in Sources */,
 				366B25C625B70DC500C91DEA /* MessageView.swift in Sources */,
 				36A5D5EF25B5A2F700F6D424 /* ConversationCell.swift in Sources */,
 			);

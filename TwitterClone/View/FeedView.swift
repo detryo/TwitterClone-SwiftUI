@@ -35,7 +35,7 @@ struct FeedView: View {
             .clipShape(Circle())
             .padding()
             .fullScreenCover(isPresented: $isShowingNewTweetView) {
-                NewTweetView(isPressented: $isShowingNewTweetView)
+                NewTweetView(isPresented: $isShowingNewTweetView)
             }
         }
     }

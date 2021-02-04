@@ -10,8 +10,14 @@ import Kingfisher
 
 struct NewTweetView: View {
     
-    @Binding var isPressented: Bool
+    @ObservedObject var viewModel: UploadNewTweetModel
+    @Binding var isPresented: Bool
     @State var captionText: String = ""
+    
+    init(isPresented: Binding<Bool>) {
+        self._isPresented = isPresented
+        self.viewModel = UploadNewTweetModel(isPresented: isPresented)
+    }
     
     var body: some View {
         NavigationView {
@@ -31,12 +37,14 @@ struct NewTweetView: View {
                     Spacer()
                 }
                 .padding()
-                .navigationBarItems(leading: Button(action: { isPressented.toggle()}, label: {
+                .navigationBarItems(leading: Button(action: { isPresented.toggle()}, label: {
                     
                     Text("Cancel")
                         .foregroundColor(.blue)
                 }),
-                trailing:  Button(action: {}, label: {
+                trailing:  Button(action: {
+                    viewModel.uploadTweet(caption: captionText)
+                }, label: {
                     Text("Tweet")
                         .padding(.horizontal)
                     padding(.vertical, 8)
@@ -52,6 +60,6 @@ struct NewTweetView: View {
 
 struct NewTweetView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTweetView(isPressented: .constant(true))
+        NewTweetView(isPresented: .constant(true))
     }
 }
