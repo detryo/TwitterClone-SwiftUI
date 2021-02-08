@@ -10,20 +10,22 @@ import SwiftUI
 struct FeedView: View {
     
     @State var isShowingNewTweetView = false
-    @EnvironmentObject var viewModel: AuthViewModel
-
+    @ObservedObject var viewModel = FeedViewModel()
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             
             ScrollView {
-                VStack {
-                    ForEach(0..<20) { _ in
-                        TweetCell()
+                LazyVStack {
+                    ForEach(viewModel.tweets) { tweet in
+                        NavigationLink(destination: TweetDetailView(tweet: tweet)) {
+                            TweetCell(tweet: tweet)
+                        }
                     }
                 }.padding()
             }
             
-            Button(action: { isShowingNewTweetView.toggle() }, label: {
+            Button(action: { self.isShowingNewTweetView.toggle() }, label: {
                 Image("Tweet")
                     .resizable()
                     .renderingMode(.template)
@@ -40,6 +42,8 @@ struct FeedView: View {
         }
     }
 }
+
+
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {

@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct TweetCell: View {
+    
+    let tweet: Tweet
     
     var body: some View {
         
         VStack(alignment: .leading) {
             HStack(alignment: .top, spacing: 12) {
-                Image("venom-10")
+                KFImage(URL(string: tweet.profileImageURL))
                     .resizable()
                     .scaledToFill()
                     .clipped()
@@ -23,64 +26,28 @@ struct TweetCell: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
-                        Text("Bruce Wayne")
+                        Text(tweet.fullname)
                             .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(.black)
                         
-                        Text("@batman *")
+                        Text("@\(tweet.username)")
                             .foregroundColor(.gray)
                         
                         Text("2w")
                             .foregroundColor(.gray)
                     }
                     
-                    Text("It's not who I am underneath, but what I do that defines me")
+                    Text(tweet.caption)
+                        .foregroundColor(.black)
                 }
             }
             .padding(.bottom)
             .padding(.trailing)
             
-            HStack {
-                Button(action: {}, label: {
-                    Image(systemName: "bubble.left")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
-                })
-                
-                Spacer()
-                
-                Button(action: {}, label: {
-                    Image(systemName: "arrow.2.squarepath")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
-                })
-                
-                Spacer()
-                
-                Button(action: {}, label: {
-                    Image(systemName: "heart")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
-                })
-                
-                Spacer()
-                
-                Button(action: {}, label: {
-                    Image(systemName: "bookmark")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
-                })
-            }
-            .foregroundColor(.gray)
-            .padding(.horizontal)
+            TweetActionsViews(tweet: tweet)
             
             Divider()
         }
         .padding(.leading, -16)
-    }
-}
-
-struct TweetCell_Previews: PreviewProvider {
-    static var previews: some View {
-        TweetCell()
     }
 }

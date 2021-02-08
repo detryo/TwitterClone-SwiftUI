@@ -8,7 +8,6 @@
 import SwiftUI
 
 enum TweetFilterOptions: Int, CaseIterable {
-    
     case tweets
     case replies
     case likes
