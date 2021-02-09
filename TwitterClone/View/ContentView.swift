@@ -9,11 +9,11 @@ import SwiftUI
 import Kingfisher
 
 struct ContentView: View {
-    
+
     @EnvironmentObject var viewModel: AuthViewModel
-    
+
     var body: some View {
-        
+
         Group {
             if viewModel.userSession != nil {
                 NavigationView {
@@ -23,13 +23,13 @@ struct ContentView: View {
                                 Image(systemName: "house")
                                 Text("Home")
                             }
-                        
+
                         SearchView()
                             .tabItem {
                                 Image(systemName: "magnifyingglass")
                                 Text("Search")
                             }
-                        
+
                         ConversationView()
                             .tabItem {
                                 Image(systemName: "envelope")

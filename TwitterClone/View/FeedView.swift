@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct FeedView: View {
-    
     @State var isShowingNewTweetView = false
     @ObservedObject var viewModel = FeedViewModel()
-    
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            
             ScrollView {
                 LazyVStack {
                     ForEach(viewModel.tweets) { tweet in
@@ -25,7 +23,7 @@ struct FeedView: View {
                 }.padding()
             }
             
-            Button(action: { self.isShowingNewTweetView.toggle() }, label: {
+            Button(action: { isShowingNewTweetView.toggle() }, label: {
                 Image("Tweet")
                     .resizable()
                     .renderingMode(.template)
@@ -42,8 +40,6 @@ struct FeedView: View {
         }
     }
 }
-
-
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
