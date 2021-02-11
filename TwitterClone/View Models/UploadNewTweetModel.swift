@@ -27,7 +27,7 @@ class UploadNewTweetModel: ObservableObject {
                                     "fullname": user.fullname,
                                     "timestamp": Timestamp(date: Date()),
                                     "username": user.username,
-                                    "profileImageURL": user.profileImageURL,
+                                    "profileImageURL": user.profileImageUrl,
                                     "likes": 0,
                                     "id": docRef.documentID]
         

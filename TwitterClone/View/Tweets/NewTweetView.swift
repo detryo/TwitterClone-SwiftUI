@@ -25,7 +25,7 @@ struct NewTweetView: View {
                 HStack(alignment: .top) {
                     
                     if let user = AuthViewModel.shared.user {
-                        KFImage(URL(string: user.profileImageURL))
+                        KFImage(URL(string: user.profileImageUrl))
                             .resizable()
                             .scaledToFill()
                             .clipped()

@@ -41,7 +41,7 @@ struct ContentView: View {
                         viewModel.signOut()
                     }, label: {
                         if let user = viewModel.user {
-                            KFImage(URL(string: user.profileImageURL))
+                            KFImage(URL(string: user.profileImageUrl))
                                 .resizable()
                                 .scaledToFill()
                                 .clipped()

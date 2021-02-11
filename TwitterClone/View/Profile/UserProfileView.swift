@@ -11,6 +11,7 @@ struct UserProfileView: View {
     
     let user: User
     @ObservedObject var viewModel: ProfileViewModel
+    @State var selectedFilter: TweetFilterOptions = .tweets
     
     init(user: User) {
         self.user = user
@@ -21,15 +22,18 @@ struct UserProfileView: View {
        
         ScrollView {
             VStack {
-                ProfileHeaderView(isFollowed: $viewModel.isFollowed, viewModel: viewModel)
+                ProfileHeaderView(viewModel: viewModel)
                     .padding()
                 
-                ForEach(viewModel.likedTweets) { tweet in
+                FilterButtonView(selectedOption: $selectedFilter)
+                    .padding()
+                
+                ForEach(viewModel.tweets(forFilter: selectedFilter)) { tweet in
                     TweetCell(tweet: tweet)
                         .padding()
                 }
             }
-            .navigationTitle("Batman")
+            .navigationTitle(user.username)
         }
     }
 }
