@@ -11,6 +11,7 @@ struct ConversationView: View {
     
     @State var isShowingNewMessageView = false
     @State var showChat = false
+    @ObservedObject var viewModel = ConversationsViewModel()
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -22,13 +23,12 @@ struct ConversationView: View {
             
             ScrollView {
                 VStack {
-                    ForEach(0..<10) { _ in
-                        ConversationCell()
-//                        NavigationLink(
-//                            destination: ChatView(user: ),
-//                            label: {
-//                                ConversationCell()
-//                            })
+                    ForEach(viewModel.recentMessages) { message in
+                        NavigationLink(
+                            destination: ChatView(user: message.user),
+                            label: {
+                                ConversationCell()
+                            })
                     }
                 }.padding()
             }
