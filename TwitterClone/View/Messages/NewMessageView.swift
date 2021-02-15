@@ -9,10 +9,11 @@ import SwiftUI
 
 struct NewMessageView: View {
     
-    @ObservedObject var viewModel = SearchViewModel()
+    @ObservedObject var viewModel = SearchViewModel(config: .newMessage)
     @State var searchText = ""
     @Binding var show: Bool
     @Binding var startChat: Bool
+    @Binding var user: User?
     
     var body: some View {
         
@@ -21,12 +22,13 @@ struct NewMessageView: View {
                 .padding()
             
             VStack(alignment: .leading) {
-                ForEach(viewModel.users) { user in
+                ForEach(searchText.isEmpty ? viewModel.users : viewModel.filterUsers(searchText)) { user in
                     HStack{ Spacer() }
                     
                     Button(action: {
                         self.show.toggle()
                         self.startChat.toggle()
+                        self.user = user
                         
                     }, label: {
                         UserCell(user: user)
@@ -34,11 +36,5 @@ struct NewMessageView: View {
                 }
             }.padding(.leading)
         }
-    }
-}
-
-struct NewMessageView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewMessageView(show: .constant(true), startChat: .constant(true))
     }
 }
